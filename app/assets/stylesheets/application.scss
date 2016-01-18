@@ -1,0 +1,299 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require 'masonry/transitions'
+ *= require_tree .
+ *= require_self
+ */
+
+@import "bootstrap-sprockets";
+@import "bootstrap";
+@import "font-awesome-sprockets";
+@import "font-awesome";
+
+@import url(https://fonts.googleapis.com/css?family=Cambay);
+
+
+/* Common-style */
+
+body {
+    width: 100%;
+    height: 100%;
+    font-family: 'Cambay', sans-serif, 'Nanum Gothic', serif;
+}
+
+html {
+    width: 100%;
+    height: 100%;
+}
+
+a {
+    color: #42dca3;
+    -webkit-transition: all .2s ease-in-out;
+    -moz-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+}
+
+a:hover,
+a:focus {
+    text-decoration: none;
+    color: #1d9b6c;
+}
+
+
+/* Navbar */
+
+.navbar-custom {
+    margin-bottom: 0;
+    border-bottom: 1px solid rgba(255,255,255,.3);
+    font-family: 'Cambay', sans-serif;
+    background-color: #000;
+}
+
+.navbar-custom .navbar-brand {
+    font-weight: 700;
+}
+
+.navbar-custom .navbar-brand:focus {
+    outline: 0;
+}
+
+.navbar-custom .navbar-brand .navbar-toggle {
+    padding: 4px 6px;
+    font-size: 16px;
+    color: #fff;
+}
+
+.navbar-custom .navbar-brand .navbar-toggle:focus,
+.navbar-custom .navbar-brand .navbar-toggle:active {
+    outline: 0;
+}
+
+.navbar-custom a {
+    color: #fff;
+}
+
+.navbar-custom .nav li a {
+    -webkit-transition: background .3s ease-in-out;
+    -moz-transition: background .3s ease-in-out;
+    transition: background .3s ease-in-out;
+}
+
+.navbar-custom .nav li a:hover {
+    outline: 0;
+    color: rgba(255,255,255,.8);
+    background-color: transparent;
+}
+
+.navbar-custom .nav li a:focus,
+.navbar-custom .nav li a:active {
+    outline: 0;
+    background-color: transparent;
+}
+
+.navbar-custom .nav li.active {
+    outline: 0;
+}
+
+.navbar-custom .nav li.active a {
+    background-color: rgba(255,255,255,.3);
+}
+
+.navbar-custom .nav li.active a:hover {
+    color: #fff;
+}
+
+@media(min-width:768px) {
+    .navbar-custom {
+        padding: 20px 0;
+        border-bottom: 0;
+        letter-spacing: 1px;
+        background: 0 0;
+        -webkit-transition: background .5s ease-in-out,padding .5s ease-in-out;
+        -moz-transition: background .5s ease-in-out,padding .5s ease-in-out;
+        transition: background .5s ease-in-out,padding .5s ease-in-out;
+    }
+
+    .navbar-custom.top-nav-collapse {
+        padding: 0;
+        border-bottom: 1px solid rgba(255,255,255,.3);
+        background: #000;
+    }
+}
+
+
+/* Intro-header */
+
+.intro {
+    display: table;
+    width: 100%;
+    height: 100%;
+    padding: 100px 0;
+    text-align: center;
+    color: #fff;
+    background-color: #000;
+}
+
+.intro .intro-body {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.intro .intro-body .brand-heading {
+    font-size: 40px;
+}
+
+.intro .intro-body .intro-text {
+    font-size: 18px;
+}
+
+@media(min-width:768px) {
+    .intro {
+        height: 100%;
+        padding: 0;
+    }
+
+    .intro .intro-body .brand-heading {
+        font-size: 70px;
+    }
+
+    .intro .intro-body .intro-text {
+        font-size: 26px;
+    }
+}
+
+
+/* Pin Box */
+
+.main-page {
+  margin-top: 40px;
+}
+
+#pins {
+  margin: 0 auto;
+  width: 100%;
+  max-height: 500px;
+  .box {
+    margin: 10px;
+    width: 350px;
+    border-color: #D8D8D8;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);
+    border-radius: 0px;
+    text-align: center;
+    img {
+      max-width: 100%;
+    }
+    h2 {
+      background-color: #000;
+      color: #fff;
+      border-color: #D8D8D8;
+      font-size: 22px;
+      margin: 0;
+      padding: 25px 10px;
+      a {
+        color: #9B9B9B;
+      }
+    }
+    .img-box {
+      display: block;
+      position: relative;
+      margin: 0 auto;
+    }
+    .img-box-caption {
+      display: block;
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      color: #fff;
+      opacity: 0;
+      background: rgba(74,74,74,.7);
+      -webkit-transition: all .35s;
+      -moz-transition: all .35s;
+      transition: all .35s;
+    }
+    .img-box-caption-title {
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      text-align: center;
+      transform: translateY(-50%);
+    }
+    .img-box:hover .img-box-caption {
+      opacity: 1;
+    }
+    .user {
+      font-size: 12px;
+      border-top: 1px solid #EAEAEA;
+      padding: 10px;
+      margin: 0;
+      color: #9B9B9B;
+    }
+    .comment {
+      padding-left: 10px;
+      padding-top: 10px;
+      color: #9B9B9B;
+    }
+    #new_comment {
+      text-align: left;
+    }
+    #comment_content {
+      width: 93%;
+      margin-left: 10px;
+      margin-bottom: 10px;
+    }
+    .favicon {
+      width: 30px;
+      text-align: center;
+      margin: 0 auto;
+      margin-bottom: 10px;
+    }
+    .link-title {
+      padding: 10px;
+    }
+    .link-description {
+      color: #D8D8D8;
+      padding: 10px;
+    }
+  }
+}
+
+
+/* Votes */
+
+.likes {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-size: 16px;
+}
+
+.vote-count {
+  font-size: 20px;
+}
+
+.vote-link {
+  cursor: pointer;
+  color: #9B9B9B;
+
+  &:hover {
+    color: #fff;
+  }
+}
+
+.likes-text {
+  font-family: "Helvetica Neue", Helvetica, sans-serif, 'Open Sans', 'Nanum Gothic', serif;
+}
+
+
+
+

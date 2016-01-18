@@ -1,0 +1,94 @@
+<!-- Intro Header -->
+<header class="intro">
+  <div class="intro-body">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+          <h1 class="brand-heading">Your TagLine is Matter</h1>
+          <p class="intro-text">Search the taglines, not just the news articles.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="container main-page">
+  <div class="transitions-enabled" id="pins">
+    <% @posts.each do |post| %>
+    <% object = LinkThumbnailer.generate(post.caption) %>
+      <div class="box panel panel-default">
+        <h2>
+          <%= truncate(post.title, length: 70, separator: ' ') %>
+          <div class="likes">
+            <span class="vote-link" data-url="<%= post_upvote_path(post) %>" data-id="<%= post.id %>">
+              <i class="fa fa-thumbs-up"> <span class="likes-text">Likes</span></i> <span class="vote-count"><b> <%= post.get_upvotes.size %></b></span>
+            </span>
+          </div>
+        </h2>
+        <%= link_to post.caption, :target => "_blank" do %>
+          <div class="img-box">
+            <%= image_tag (object.images.first.try(:src).try(:to_s) || image_path('no_image.png') )%>
+            <div class="img-box-caption">
+              <div class="img-box-caption-title">
+                <div class="link-title">
+                  <b><%= truncate(object.title, length: 30, separator: ' ') %></b>
+                </div>
+                <div class="link-description">
+                  <%= truncate(object.description, length: 120, separator: ' ') %>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+        <p class="text-left comment">
+          <% if post.comments %>
+            <% post.comments.each do |comment| %>
+              <b><%= comment.user.user_name %></b>
+              <%= comment.content %>
+              <% if comment.user == current_user %>
+                <%= link_to "Delete", post_comment_path(post, comment), method: :delete, data: { confirm: "Are you sure?" } %>
+              <% end %>
+              <br />
+            <% end %>
+          <% end %>
+
+
+          <% if user_signed_in? %>
+            <%= form_for [post, post.comments.build] do |f| %>
+              <%= f.text_field :content, placeholder: 'Add a comment...' %>
+            <% end %>
+          <% end %>
+        </p>
+        <p class="user">
+          AddLined by <b><%= post.user.user_name %></b>
+        </p>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<p><%= paginate @posts %></p>
+
+<script>
+  $('.vote-link').click(function() {
+    var $self = $(this)
+    var post_id = $self.data('id')
+
+    $.ajax({
+      url: $self.data('url'),
+      type: 'PATCH',
+      data: {
+        post_id: post_id
+      },
+      dataType: 'json',
+      statusCode: {
+        200: function(data) {
+          $self.find('.vote-count').text(data.count);
+        }
+      },
+      error: function(req, status, error) {
+        return console.log(status);
+      }
+    });
+  })
+</script>
