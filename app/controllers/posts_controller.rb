@@ -3,7 +3,11 @@ class PostsController < ApplicationController
   before_action :owned_post, only: [:edit, :update, :destroy]
 
   def index
-    @posts = Post.all.order(id: :desc).page(params[:page])
+    if params[:search].present?
+      @posts = Post.matching_title(params[:search]).page params[:page]
+    else
+      @posts = Post.all.order(id: :desc).page(params[:page])
+    end
   end
 
   def show

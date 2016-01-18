@@ -1,0 +1,12 @@
+<div class="row">
+  <%= form_tag(route, method: :get) do %>
+    <div class="input-group search-bar">
+      <%= text_field_tag :search, nil, class: 'form-control', placeholder: 'Search Taglines' %>
+      <span class="input-group-btn">
+      <%= button_tag( :class => "btn btn-default") do %>
+        <span class='glyphicon glyphicon-search'></span>
+      <% end %>
+      </span>
+    </div>
+  <% end %>
+</div>
